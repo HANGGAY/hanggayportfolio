@@ -2,12 +2,18 @@
 
 import Image from 'next/image';
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
+  Card as MT_Card,
+  CardHeader as MT_CardHeader,
+  CardBody as MT_CardBody,
+  Typography as MT_Typography,
+  Button as MT_Button,
 } from '@material-tailwind/react';
+
+const Card = MT_Card as any;
+const CardHeader = MT_CardHeader as any;
+const CardBody = MT_CardBody as any;
+const Typography = MT_Typography as any;
+const Button = MT_Button as any;
 
 interface ProjectCardProps {
   img: string;
@@ -28,9 +34,9 @@ export default function ProjectCard({
     <Card
       color="transparent"
       shadow={false}
-      className="hover:shadow-lg transition-shadow duration-300"
+      className="transition-shadow duration-300 hover:shadow-lg"
     >
-      <CardHeader floated={false} className="mx-0 mt-0 mb-6 h-48">
+      <CardHeader floated={false} className="mx-0 mb-6 mt-0 h-48">
         <Image
           src={img}
           alt={title}
@@ -39,6 +45,7 @@ export default function ProjectCard({
           className="h-full w-full object-cover"
         />
       </CardHeader>
+
       <CardBody className="p-0">
         <a
           href={link || '#'}
@@ -48,14 +55,17 @@ export default function ProjectCard({
             {title}
           </Typography>
         </a>
+
         {role && (
-          <Typography variant="small" className="text-gray-500 mb-2 block">
+          <Typography variant="small" className="mb-2 block text-gray-500">
             {role}
           </Typography>
         )}
+
         <Typography className="mb-6 font-normal !text-gray-500">
           {desc}
         </Typography>
+
         {link && (
           <Button
             color="gray"

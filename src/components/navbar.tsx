@@ -1,42 +1,33 @@
 'use client';
 
 import React from 'react';
+import { Collapse } from '@material-tailwind/react';
+
 import {
   Navbar as MTNavbar,
-  Collapse,
-  Button,
-  IconButton,
-  Typography,
+  Typography as MT_Typography,
+  Button as MT_Button,
+  IconButton as MT_IconButton,
 } from '@material-tailwind/react';
+
+const Navbar = MTNavbar as any;
+const IconButton = MT_IconButton as any;
+
+const Typography = MT_Typography as any;
+const Button = MT_Button as any;
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 import { cv } from '../../data/cv';
-import {
-  Home,
-  Code,
-  Server,
-  Database,
-  GraduationCap,
-  Mail,
-} from 'lucide-react';
+import { Home, Code, Server, Database, Wrench, FileText } from 'lucide-react';
 
 // Menu portofolio
 const NAV_MENU = [
   { name: 'Home', icon: Home, href: '#hero' },
-
-  // Skill = coding / tech stack
   { name: 'Skills', icon: Code, href: '#skills' },
-
-  // Experience = infrastructure / ops / work history
   { name: 'Experience', icon: Server, href: '#experience' },
+  { name: 'Projects', icon: Database, href: '#ProjectsPage' },
+  { name: 'Education', icon: FileText, href: '#education' },
 
-  // Projects = database / system / apps
-  { name: 'Projects', icon: Database, href: '#projects' },
-
-  // Education = documents / academic background
-  { name: 'Education', icon: GraduationCap, href: '#education' },
-
-  // Contact = komunikasi (lebih tepat dari Wrench)
-  { name: 'Contact', icon: Mail, href: '#footer' },
+  { name: 'Contact', icon: Wrench, href: '#footer' },
 ];
 
 interface NavItemProps {
@@ -61,7 +52,7 @@ function NavItem({ children, href }: NavItemProps) {
   );
 }
 
-export function Navbar() {
+export function Navbarsite() {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
@@ -74,7 +65,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <MTNavbar
+    <Navbar
       shadow={false}
       fullWidth
       className="border-0 sticky top-0 z-50 bg-white"
@@ -89,7 +80,7 @@ export function Navbar() {
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
             <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" /> {name}
+              <Icon className="h-5 w-5" /> {name}.
             </NavItem>
           ))}
         </ul>
@@ -143,7 +134,7 @@ export function Navbar() {
           </div>
         </div>
       </Collapse>
-    </MTNavbar>
+    </Navbar>
   );
 }
 

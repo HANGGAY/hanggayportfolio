@@ -4,8 +4,13 @@ import { motion } from 'framer-motion';
 import { cv } from '../../data/cv';
 import { Server, Network, Code, Database, Wrench } from 'lucide-react';
 import { JSX } from 'react';
-import { Typography } from '@material-tailwind/react';
+import {
+  Typography as MT_Typography,
+  Button as MT_Button,
+} from '@material-tailwind/react';
 
+const Typography = MT_Typography as any;
+const Button = MT_Button as any;
 import {
   SiNodedotjs,
   SiExpress,
