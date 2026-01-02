@@ -1,34 +1,42 @@
-import React from "react";
+'use client';
+
+import React from 'react';
 import {
   Navbar as MTNavbar,
   Collapse,
   Button,
   IconButton,
   Typography,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { cv } from '../../data/cv';
 import {
-  RectangleStackIcon,
-  UserCircleIcon,
-  CommandLineIcon,
-  Squares2X2Icon,
-  XMarkIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/solid";
+  Home,
+  Code,
+  Server,
+  Database,
+  GraduationCap,
+  Mail,
+} from 'lucide-react';
 
+// Menu portofolio
 const NAV_MENU = [
-  {
-    name: "Page",
-    icon: RectangleStackIcon,
-  },
-  {
-    name: "Account",
-    icon: UserCircleIcon,
-  },
-  {
-    name: "Docs",
-    icon: CommandLineIcon,
-    href: "https://www.material-tailwind.com/docs/react/installation",
-  },
+  { name: 'Home', icon: Home, href: '#hero' },
+
+  // Skill = coding / tech stack
+  { name: 'Skills', icon: Code, href: '#skills' },
+
+  // Experience = infrastructure / ops / work history
+  { name: 'Experience', icon: Server, href: '#experience' },
+
+  // Projects = database / system / apps
+  { name: 'Projects', icon: Database, href: '#projects' },
+
+  // Education = documents / academic background
+  { name: 'Education', icon: GraduationCap, href: '#education' },
+
+  // Contact = komunikasi (lebih tepat dari Wrench)
+  { name: 'Contact', icon: Mail, href: '#footer' },
 ];
 
 interface NavItemProps {
@@ -41,11 +49,11 @@ function NavItem({ children, href }: NavItemProps) {
     <li>
       <Typography
         as="a"
-        href={href || "#"}
-        target={href ? "_blank" : "_self"}
+        href={href || '#'}
+        target={href?.startsWith('http') ? '_blank' : '_self'}
         variant="paragraph"
         color="gray"
-        className="flex items-center gap-2 font-medium text-gray-900"
+        className="flex items-center gap-2 font-medium text-gray-900 hover:text-indigo-600 transition-colors"
       >
         {children}
       </Typography>
@@ -60,31 +68,43 @@ export function Navbar() {
 
   React.useEffect(() => {
     window.addEventListener(
-      "resize",
+      'resize',
       () => window.innerWidth >= 960 && setOpen(false)
     );
   }, []);
 
   return (
-    <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between">
+    <MTNavbar
+      shadow={false}
+      fullWidth
+      className="border-0 sticky top-0 z-50 bg-white"
+    >
+      <div className="container mx-auto flex items-center justify-between py-4">
+        {/* Branding */}
         <Typography color="blue-gray" className="text-lg font-bold">
-          Material Tailwind
+          {cv.profile.name}
         </Typography>
+
+        {/* Desktop Menu */}
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
             <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" />
-              {name}
+              <Icon className="h-5 w-5" /> {name}
             </NavItem>
           ))}
         </ul>
+
+        {/* Desktop CTA */}
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="text">Sign In</Button>
-          <a href="https://www.material-tailwind.com/blocks" target="_blank">
-            <Button color="gray">blocks</Button>
+          <a href={cv.profile.linkedin} target="_blank">
+            <Button color="indigo">LinkedIn</Button>
+          </a>
+          <a href={cv.profile.github} target="_blank">
+            <Button color="gray">GitHub</Button>
           </a>
         </div>
+
+        {/* Mobile menu button */}
         <IconButton
           variant="text"
           color="gray"
@@ -98,20 +118,27 @@ export function Navbar() {
           )}
         </IconButton>
       </div>
+
+      {/* Mobile Menu */}
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map(({ name, icon: Icon }) => (
-              <NavItem key={name}>
-                <Icon className="h-5 w-5" />
-                {name}
+            {NAV_MENU.map(({ name, icon: Icon, href }) => (
+              <NavItem key={name} href={href}>
+                <Icon className="h-5 w-5" /> {name}
               </NavItem>
             ))}
           </ul>
-          <div className="mt-6 mb-4 flex items-center gap-2">
-            <Button variant="text">Sign In</Button>
-            <a href="https://www.material-tailwind.com/blocks" target="_blank">
-              <Button color="gray">blocks</Button>
+          <div className="mt-6 mb-4 flex flex-col gap-2">
+            <a href={cv.profile.linkedin} target="_blank">
+              <Button color="indigo" fullWidth>
+                LinkedIn
+              </Button>
+            </a>
+            <a href={cv.profile.github} target="_blank">
+              <Button color="gray" fullWidth>
+                GitHub
+              </Button>
             </a>
           </div>
         </div>

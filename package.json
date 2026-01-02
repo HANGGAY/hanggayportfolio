@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-tailwind-portfolio-page",
+  "name": "hanggayportfolio",
   "version": "1.0.0",
   "private": true,
   "author": "Creative Tim",
@@ -14,9 +14,11 @@
   "dependencies": {
     "@heroicons/react": "2.0.18",
     "@material-tailwind/react": "2.1.2",
+    "lucide-react": "^0.562.0",
     "next": "13.4.0",
     "react": "18",
-    "react-dom": "18"
+    "react-dom": "18",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@types/node": "20",

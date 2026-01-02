@@ -1,26 +1,27 @@
-"use client";
+'use client';
 
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography, Button } from '@material-tailwind/react';
 import {
   ChartBarIcon,
   PuzzlePieceIcon,
   CursorArrowRaysIcon,
   ArrowRightIcon,
-} from "@heroicons/react/24/solid";
-import { ResumeItem } from "@/components";
+} from '@heroicons/react/24/solid';
+import { ResumeItem } from '@/components';
 
 const RESUME_ITEMS = [
   {
     icon: ChartBarIcon,
-    children: "Bachelor of Science in Computer Science",
+    children: 'Bachelor of Information Systems',
   },
   {
     icon: PuzzlePieceIcon,
-    children: "Certified Web Developer ",
+    children: 'Certified Web Developer ',
   },
   {
     icon: CursorArrowRaysIcon,
-    children: "Frontend Framework Proficiency Certification",
+    children:
+      'Technical expertise across infrastructure, development, and data.',
   },
 ];
 
@@ -33,9 +34,11 @@ export function Resume() {
             My Resume
           </Typography>
           <Typography className="mb-4 mt-3 w-9/12 font-normal !text-gray-500">
-            Highly skilled and creative Web Developer with 5+ years of
-            experience in crafting visually stunning and functionally robust
-            websites and web applications.
+            IT Engineer & IT Operations Specialist with 3+ years of experience
+            in enterprise multi-site environments, combining IT infrastructure,
+            network security, system development, and IT service management.
+            Proven in delivering business-driven IT solutions that reduce
+            downtime and improve operational efficiency.
           </Typography>
           <Button
             variant="text"

@@ -1,81 +1,157 @@
-"use client";
+'use client';
 
-import { Typography } from "@material-tailwind/react";
+import { motion } from 'framer-motion';
+import { cv } from '../../data/cv';
+import { Server, Network, Code, Database, Wrench } from 'lucide-react';
+import { JSX } from 'react';
+import { Typography } from '@material-tailwind/react';
+
 import {
-  RectangleGroupIcon,
-  FingerPrintIcon,
-  SwatchIcon,
-  HashtagIcon,
-  EyeIcon,
-  DocumentTextIcon,
-} from "@heroicons/react/24/solid";
-import { SkillCard } from "@/components";
+  SiNodedotjs,
+  SiExpress,
+  SiNestjs,
+  SiLaravel,
+  SiCodeigniter,
+  SiReact,
+  SiNextdotjs,
+  SiPython,
+  SiMysql,
+  SiTableau,
+  SiGithub,
+  SiDocker,
+  SiLinux,
+  SiJupyter,
+  SiN8N,
+  SiTensorflow,
+  SiOpenai,
+} from 'react-icons/si';
 
-const SKILLS = [
-  {
-    icon: RectangleGroupIcon,
-    title: "Frontend Web Development:",
-    children:
-      "Creating beautiful and functional web experiences is my forte. Using the latest technologies and best practices, I design and build websites that captivate and engage users.",
-  },
-  {
-    icon: FingerPrintIcon,
-    title: "Mobile App Development",
-    children:
-      " I specialize in creating responsive and intuitive mobile apps that work seamlessly across iOS & Android devices. From concept to deployment, I handle every stage of the development process.",
-  },
-  {
-    icon: SwatchIcon,
-    title: "Technology Stack",
-    children:
-      "I'm well-versed in the industry's most popular frontend technologies, including HTML5, CSS3, JavaScript, and frameworks like React and React Native.",
-  },
-  {
-    icon: HashtagIcon,
-    title: " Web Optimization",
-    children:
-      "Performance matters. I optimize websites and apps for speed, ensuring your users enjoy a fast and responsive experience, which in turn boosts user satisfaction and SEO rankings.",
-  },
-  {
-    icon: EyeIcon,
-    title: "User-Centric Design",
-    children:
-      "My development goes hand-in-hand with an eye for design. I create user interfaces that are not only functional but also aesthetically pleasing, providing a seamless and enjoyable user journey.",
-  },
-  {
-    icon: DocumentTextIcon,
-    title: "Testing and Quality Assurance",
-    children:
-      "I rigorously test and debug applications to guarantee a bug-free and secure environment for users. Your peace of mind is as important to me as the functionality of your project.",
-  },
-];
+/* =======================
+   TECH ICON MAP
+======================= */
+const techIconMap: Record<string, JSX.Element> = {
+  Node: <SiNodedotjs size={24} />,
+  Express: <SiExpress size={24} />,
+  Nest: <SiNestjs size={24} />,
+  Laravel: <SiLaravel size={24} />,
+  CodeIgniter: <SiCodeigniter size={24} />,
+  React: <SiReact size={24} />,
+  Next: <SiNextdotjs size={24} />,
+  Python: <SiPython size={24} />,
+  SQL: <SiMysql size={24} />,
+  Database: <SiMysql size={24} />,
+  Tableau: <SiTableau size={24} />,
+  Git: <SiGithub size={24} />,
+  Docker: <SiDocker size={24} />,
+  Linux: <SiLinux size={24} />,
+  Jupyter: <SiJupyter size={24} />,
+  n8n: <SiN8N size={24} />,
+  Tensor: <SiTensorflow size={24} />,
+  Flowise: <SiOpenai size={24} />,
+};
 
-export function Skills() {
+/* =======================
+   CATEGORY ICONS
+======================= */
+const categoryIcons: Record<string, JSX.Element[]> = {
+  'IT Infrastructure & Operations': [
+    <Server key="server" size={20} />,
+    <Network key="network" size={20} />,
+  ],
+  'Software & System Development': [<Code key="code" size={20} />],
+  'Data & Analytics': [<Database key="database" size={20} />],
+  'Tools & Platforms': [<Wrench key="wrench" size={20} />],
+};
+
+/* =======================
+   GET TECH ICONS
+======================= */
+function getTechIcons(items: string[]) {
+  const icons = new Map<string, JSX.Element>();
+  items.forEach((item) => {
+    Object.entries(techIconMap).forEach(([key, icon]) => {
+      if (item.toLowerCase().includes(key.toLowerCase())) {
+        icons.set(key, icon);
+      }
+    });
+  });
+  return Array.from(icons.values());
+}
+
+/* =======================
+   SKILLS COMPONENT
+======================= */
+export default function Skills() {
   return (
-    <section className="px-8">
-      <div className="container mx-auto mb-20 text-center">
-        <Typography color="blue-gray" className="mb-2 font-bold uppercase">
-          my skills
-        </Typography>
-        <Typography variant="h1" color="blue-gray" className="mb-4">
-          What I do
-        </Typography>
-        <Typography
-          variant="lead"
-          className="mx-auto w-full !text-gray-500 lg:w-10/12"
-        >
-          I&apos;m not just a developer; I&apos;m a digital dreamweaver.
-          Crafting immersive online experiences is not just a job but my
-          calling. Discover below how I can help you.
-        </Typography>
-      </div>
-      <div className="container mx-auto grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {SKILLS.map((props, idx) => (
-          <SkillCard key={idx} {...props} />
-        ))}
+    <section id="skills" className="py-24 relative ">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="container mx-auto mb-20 text-center">
+          <Typography className="mb-2 font-bold uppercase">
+            my skills
+          </Typography>
+          <Typography variant="h1" className="mb-4">
+            What I do
+          </Typography>
+          <Typography
+            variant="lead"
+            className="mx-auto w-full !text-gray-500 lg:w-10/12"
+          >
+            Technical expertise across infrastructure, development, and data.
+          </Typography>
+        </div>
+
+        {/* Skill Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {cv.skills.map((skill, idx) => (
+            <motion.div
+              key={skill.category}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.6 }}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6 hover:shadow-lg transition"
+            >
+              {/* Category */}
+              <div className="flex items-center gap-3 mb-4">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {skill.category}
+                </h3>
+                <div className="flex gap-2 text-gray-400 opacity-70">
+                  {categoryIcons[skill.category]}
+                </div>
+              </div>
+
+              {/* Skill Items */}
+              <div className="flex flex-wrap gap-3 mb-6">
+                {skill.items.map((item, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1.5 rounded-full text-sm text-slate-200
+                               border border-white/10 bg-slate-900/60
+                               hover:border-gray-400/40 transition"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              {/* Tech Icons */}
+              <div className="flex flex-wrap gap-3 text-gray-400 opacity-90">
+                {getTechIcons(skill.items).map((icon, i) => (
+                  <span
+                    key={i}
+                    className="p-3 rounded-xl bg-slate-900/60 border border-white/10
+                               hover:border-gray-400/50 hover:scale-105 transition"
+                  >
+                    {icon}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
-
-export default Skills;
